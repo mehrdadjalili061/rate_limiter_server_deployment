@@ -18,7 +18,7 @@ spec:
         - name: facegram-registery
       containers:
         - name: ratelimit-api-server
-          image: ""
+          image: cr.fcgm.dev/facegram/rate_limiter:64742c90
           ports:
             - containerPort: 30003
           env:
