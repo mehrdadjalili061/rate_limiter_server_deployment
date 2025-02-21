@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratelimit-api-server
+  labels:
+    app: ratelimit-api-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratelimit-api-server
+  template:
+    metadata:
+      labels:
+        app: ratelimit-api-server
+    spec:
+      imagePullSecrets:
+        - name: facegram-registery
+      containers:
+        - name: ratelimit-api-server
+          image: ""
+          ports:
+            - containerPort: 30003
+          env:
+            - name: NODE_ENV
+              value: "dev"   
+          envFrom:
+            - secretRef:
+                name: grpc-client-configs
+            - secretRef:
+                name: aes-keys
+            - secretRef:
+                name: sentry-credential
+            - secretRef:
+                name: mongodb-credential  
+            - secretRef:
+                name: redis-credential                                              
